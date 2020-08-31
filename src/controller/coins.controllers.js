@@ -10,10 +10,10 @@ export async function createCoin(req, res) {
     comparateError(obj);
     let create = await addCoins({ ...obj.value, id_user: 2 });
 
-    res.json("creado");
+    res.json({ message: "creado" });
   } catch (error) {
     console.error(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 
@@ -28,19 +28,19 @@ export async function updCoin(req, res) {
 
     let upd = await updateCoins({ ...rest }, { id });
 
-    return res.json("Actualizado");
+    return res.json({ message: "Actualizado" });
   } catch (error) {
     console.error(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 
 export async function getCoin(req, res) {
   try {
     let coins = await getAllCoins();
-    res.json(coins);
+    res.json({ message: coins });
   } catch (error) {
     console.error(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }

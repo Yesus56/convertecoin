@@ -10,20 +10,20 @@ export async function createViews(req, res) {
     let obj = await SchemaViews.validate({ ...view });
     comparateError(obj);
     let viewCreate = await addView({ ...obj.value });
-    res.json("Vista Creada");
+    res.json({ message: "Vista Creada" });
   } catch (error) {
     console.error(error);
-    res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 export async function getViews(req, res) {
   let body = req.body;
   try {
     let view = await getView();
-    res.json(view);
+    res.json({ message: view });
   } catch (error) {
     console.log(error);
-    res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 export async function updViews(req, res) {
@@ -34,22 +34,22 @@ export async function updViews(req, res) {
     comparateError(obj);
     comparateError(where);
     let result = await updateView({ ...obj.value }, { ...where.value });
-    return res.json("actualizado");
+    return res.json({ message: "actualizado" });
   } catch (error) {
     console.error(error);
-    res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 export async function viewOne(req, res) {
-  let body = req.body;
+  let body = req.query;
   try {
     let { id_view } = body;
     let obj = SchemaviewsId.validate({ id: id_view });
     comparateError(obj);
     let view = await getView(obj.value);
-    res.json(view);
+    res.json({ message: view });
   } catch (error) {
     console.log(error);
-    res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }

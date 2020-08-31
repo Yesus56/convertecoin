@@ -23,8 +23,8 @@ APP.use(morgan("dev"));
 
 //rutas
 
-APP.use("/api/money", money);
 APP.use("/api/user", user);
+APP.use("/api/money", money);
 APP.use("/api/rol", rol);
 APP.use("/api/view", view);
 APP.use("/api/permission", permission);

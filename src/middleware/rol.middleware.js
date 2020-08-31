@@ -7,7 +7,7 @@ export function rolPermission(req, res, next) {
   let urlSplit = req.originalUrl.split("?");
   let url = typeof methoSplit == "string" ? req.originalUrl : urlSplit[0];
   if (isUndefined(roles[url])) {
-    return res.status(401).json("No posee permisos a estas ruta ");
+    return res.status(401).json({ error: "No posee permisos a estas ruta " });
   }
 
   roles[url].map((value, key) => {
@@ -18,8 +18,6 @@ export function rolPermission(req, res, next) {
   });
 
   if (status) {
-    res
-      .status(401)
-      .json({ message: "No tiene acceso a esta funcion", newToken, roles });
+    res.status(401).json({ error: "No tiene acceso a esta funcion", newToken });
   }
 }

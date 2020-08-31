@@ -44,15 +44,16 @@ export async function login(req, res) {
       },
       process.env.PASSSECRET
     );
-    return res.json({ user, token });
+    return res.json({ token });
   } catch (error) {
     console.log(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 
 //crear usuario
 export async function createUser(req, res) {
+  console.log("prueba cerar");
   let body = req.body;
   try {
     let { user } = body;
@@ -65,7 +66,7 @@ export async function createUser(req, res) {
     return res.json({ message: "Usuario fue creado" });
   } catch (error) {
     console.log(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 //actulizar password
@@ -74,14 +75,15 @@ export async function updatePassword(req, res) {
 
   try {
     let { updpass } = body;
-    let obj = await SchemaUserPassword.validate({ ...updpass });
+    console.log(updpass);
+    let obj = await SchemaUserPassword.validate(updpass);
     comparateError(obj);
     obj.value.password = await bcrypt.hashSync(obj.value.password, 10);
-    let upd = await updateUser({ ...obj.value }, { id: 7 });
+    let upd = await updateUser({ ...obj.value }, { id: 2 });
     return res.json({ message: "Clave Actualizada" });
   } catch (error) {
     console.log(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 

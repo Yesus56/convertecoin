@@ -1,0 +1,20 @@
+{
+  "database": {
+    "coin_converte": {
+      "database": "coin_converter",
+      "username": "postgres",
+      "password": "root",
+      "patch": {
+        "host": "10.11.11.34",
+        "port": 5432,
+        "dialect": "postgres",
+        "pool": {
+          "max": 5,
+          "min": 0,
+          "require": 30000,
+          "idle": 30
+        }
+      }
+    }
+  }
+}

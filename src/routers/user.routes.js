@@ -11,9 +11,10 @@ import { rolPermission } from "../middleware/rol.middleware";
 const ROUTER = Router();
 
 ROUTER.post("/login", login);
+
 ROUTER.use(verifiToken);
 ROUTER.use(rolPermission);
+ROUTER.put("/changepassword", updatePassword);
 ROUTER.post("/", createUser);
 ROUTER.put("/", updateUsers);
-ROUTER.put("/changepassword", updatePassword);
 export default ROUTER;

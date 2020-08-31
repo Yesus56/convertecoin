@@ -11,10 +11,10 @@ export async function createRol(req, res) {
     comparateError(obj);
     console.log(obj);
     let rolc = await addrol({ ...obj.value });
-    return res.json("Rol creado");
+    return res.json({ message: "Rol creado" });
   } catch (error) {
     console.log(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 
@@ -28,10 +28,10 @@ export async function updRol(req, res) {
     comparateError(obj);
     comparateError(where);
     let result = await updaterol({ ...obj.value }, { ...where.value });
-    return res.json(result);
+    return res.json({ message: "actualizado" });
   } catch (error) {
     console.log(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 
@@ -40,22 +40,22 @@ export async function getaLLRol(req, res) {
   let body = req.body;
   try {
     let result = await getrol();
-    return res.json(result);
+    return res.json({ message: result });
   } catch (error) {
     console.log(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 
 export async function getOne(req, res) {
-  let body = req.body;
+  let body = req.query;
   try {
     let where = await RolidSchema.validate({ id: body.id_rol });
     comparateError(where);
     let result = await getrol({ ...where.value });
-    return res.json(result);
+    return res.json({ message: result });
   } catch (error) {
     console.log(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }

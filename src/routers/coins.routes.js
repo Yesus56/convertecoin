@@ -5,10 +5,11 @@ import { rolPermission } from "../middleware/rol.middleware";
 
 const ROUTER = Router();
 
+ROUTER.get("/", getCoin);
+
 ROUTER.use(verifiToken);
 ROUTER.use(rolPermission);
 ROUTER.post("/", createCoin);
 ROUTER.put("/", updCoin);
-ROUTER.get("/", getCoin);
 
 export default ROUTER;

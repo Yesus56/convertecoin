@@ -12,8 +12,8 @@ import { comparateError } from "../utils/errors";
 export async function converter(req, res) {
   let body = req.body;
   try {
-    let { monedaEntrate, monedaSaliente, cantidad } = body;
-    let coin = await getMonedaEandS(monedaEntrate, monedaSaliente);
+    let { monedaEntrante, monedaSaliente, cantidad } = body;
+    let coin = await getMonedaEandS(monedaEntrante, monedaSaliente);
     let monedaEntra, monedaSale;
 
     if (!isUndefined(coin[1])) {
@@ -71,10 +71,10 @@ export async function converter(req, res) {
     );
     let data = conve.calcular();
 
-    return res.json(data);
+    return res.json({ message: data });
   } catch (error) {
     console.log(error);
-    res.json(error);
+    return res.json({ error: "" + error });
   }
 }
 
@@ -84,10 +84,10 @@ export async function addPrice(req, res) {
     let { price } = req.body;
     let obj = addPriceSchema.validate(price);
     comparateError(obj);
-    let inprice = await addPrices({ obj });
+    let inprice = await addPrices({ ...obj.value });
     res.json("agregado");
   } catch (error) {
     console.log(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }

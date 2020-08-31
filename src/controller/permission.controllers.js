@@ -19,7 +19,7 @@ export async function createPermission(req, res) {
     res.json("permiso creado");
   } catch (error) {
     console.error(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 
@@ -33,24 +33,24 @@ export async function updPermission(req, res) {
       { nombre: obj.value.nombre },
       { ...where.value }
     );
-    return res.json("actualizado");
+    return res.json({ message: "actualizado" });
   } catch (error) {
     console.error(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 
 export async function getPermissionOne(req, res) {
-  let body = req.body;
+  let body = req.query;
   try {
     console.log(body.id);
     let obj = await SchemaPermissionId.validate({ id: body.id });
     comparateError(obj);
     let result = await getPermission(obj.value);
-    return res.json(result);
+    return res.json({ message: result });
   } catch (error) {
     console.error(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 
@@ -61,6 +61,6 @@ export async function GetAllPermission(req, res) {
     return res.json(result);
   } catch (error) {
     console.error(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }

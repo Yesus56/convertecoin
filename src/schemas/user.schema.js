@@ -13,7 +13,7 @@ const SchemaUserCreate = Joi.object({
 });
 
 const SchemaUserPassword = Joi.object({
-  password: Joi.string().max(30).required,
+  password: Joi.string().max(30).required(),
   password_repeat: Joi.ref("password"),
 });
 

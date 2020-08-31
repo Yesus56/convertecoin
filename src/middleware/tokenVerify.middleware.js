@@ -7,7 +7,7 @@ export function verifiToken(req, res, next) {
   if (isEmpty(tokenreq)) {
     return res.status(401).json({
       CodeE: "56",
-      err: "TOKEN NO ENVIADO",
+      error: "TOKEN NO ENVIADO",
     });
   }
 

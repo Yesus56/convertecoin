@@ -1,8 +1,9 @@
 import { PRICES, COINS, db } from "../db";
 
 export async function addPrices(data) {
+  console.log(data);
   try {
-    return await PRICES.create(data);
+    return await PRICES.create({ ...data });
   } catch (error) {
     console.log(error);
     throw new Error("Error al guardar");

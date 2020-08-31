@@ -21,7 +21,7 @@ export async function craeteRolper(req, res) {
     res.json("creado");
   } catch (error) {
     console.error(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 
@@ -39,24 +39,24 @@ export async function updRolper(req, res) {
       { ...obj.value },
       { ...where.value }
     );
-    return res.json("actualizado");
+    return res.json({ message: "actualizado" });
   } catch (error) {
     console.error(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 
 export async function getoneRolper(req, res) {
-  let body = req.body;
+  let body = req.query;
 
   try {
     let obj = await schemaRolPermisionid.validate({ id: body.id });
     comparateError(obj);
     let result = await getRolPermission({ ...obj.value });
-    return res.json(result);
+    return res.json({ message: result });
   } catch (error) {
     console.error(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }
 
@@ -64,9 +64,9 @@ export async function getAllRolper(req, res) {
   let body = req.body;
   try {
     let result = await getRolPermission();
-    return res.json(result);
+    return res.json({ message: result });
   } catch (error) {
     console.error(error);
-    return res.json({ message: "" + error });
+    return res.json({ error: "" + error });
   }
 }

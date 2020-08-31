@@ -49,5 +49,23 @@ export async function InsertmoneyApi(time) {
     .catch((error) => {
       console.log(error);
     });
+
+  Axios.get("https://api.ratesapi.io/api/latest", {
+    base: "EUR",
+  })
+    .then((response) => {
+      data.map((data) => {
+        if (data.acronym == "EUR") {
+          addPrices({
+            id_coin: data.id,
+            price: response.data.rates.USD,
+          });
+        }
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
   setTimeout(InsertmoneyApi, time || 300000);
 }
